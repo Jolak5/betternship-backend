@@ -4,7 +4,6 @@ const sequelize = require("../../../../../app");
 const Account = sequelize.define("Account", {
   id: {
     type: DataTypes.UUID,
-    defaultValue: UUIDV4,
     primaryKey: true,
   },
   userId: {
