@@ -24,6 +24,7 @@ Welcome to Betternship! This repository contains the codebase for our applicatio
 
 - <b>NodeJS</b>
 - <b>ExpressJS</b>
+- <b>Sequelize ORM</b>
 - <b>TypeScript</b>
 - <b>Nodemon</b>
 - <b>PostgreSQL</b>
