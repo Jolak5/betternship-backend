@@ -4,11 +4,10 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "checkJs": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/core/v1/models/BaseModel.js", "src/v1/models/User.js"],
+  "include": ["src/**/*.ts", "src/core/v1/models/BaseModel.js", "src/v1/models/User.js", "src/middlewares/auth/VerifyAuth.js"],
   "exclude": ["node_modules"]
 }
