@@ -1,29 +1,14 @@
-export const SuccessResponse = (
+import { Response } from "express";
+
+export const HttpResponse = (
+  res: Response,
+  httpcode: 200,
   message: string,
   data: object | string | undefined
 ) => {
-  return {
-    statusCode: 1,
+  return res.status(httpcode).json({
+    statusCode: httpcode,
     message,
     data,
-  };
-};
-
-export const ErrorResponse = (
-  message: string
-) => {
-  return {
-    statusCode: 0,
-    message,
-  };
-};
-
-export const UnauthorizedErrorResponse = (
-  message: string,
-  data: object | string | undefined
-) => {
-  return {
-    statusCode: 2,
-    message,
-  };
+  });
 };
