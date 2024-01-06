@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
-const Account = require("../../../core/v1/models/auth/Account");
+const Account = require("../../models/Account");
 
 const Signup = async (req, res) => {
   try {

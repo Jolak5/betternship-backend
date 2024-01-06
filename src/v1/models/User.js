@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../core/databases/init");
-const Account = require("../../core/v1/models/auth/Account");
+const Account = require("../models/Account");
 const { Role } = require("../enums/Enums");
 
 const User = sequelize.define(

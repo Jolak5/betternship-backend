@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { HttpResponse } = require("../../core/utils/Response");
-const Account = require("../../core/v1/models/auth/Account");
+const Account = require("../../v1/models/Account");
 require("dotenv").config();
 const KEY = process.env.KEY;
 
