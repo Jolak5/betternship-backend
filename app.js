@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const sequelize = require("./src/core/databases/init");
 const router = require("./src/core/v1/routers/router");
+const VerifyAuth = require("./src/middlewares/auth/VerifyAuth");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 80;
@@ -35,6 +36,8 @@ app.get("/", (_, res) => {
     message: "Welcome To The Betternship API",
   });
 });
+
+app.get('/test', VerifyAuth)
 app.use((_, res, __) => {
   res.status(404).json({
     statusCode: 0,
