@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../core/databases/init");
 const Account = require("../../core/v1/models/auth/Account");
+const { Role } = require("../enums/Enums");
 
 const User = sequelize.define(
   "User",
@@ -23,15 +24,28 @@ const User = sequelize.define(
         notNull: { msg: "First Name is required" },
       },
     },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    dateOfBirth: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.ENUM(...Role),
+      allowNull: false,
+    },
   },
   {
     tableName: "users",
+    underscored: false,
+    indexes: [
+      {
+        fields: ["firstName", "lastName"],
+      },
+    ],
   }
 );
-
-User.hasOne(Account, {
-  onDelete: "CASCADE",
-  as: "user"
-});
 
 module.exports = User;

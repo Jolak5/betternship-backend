@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../../databases/init");
+const User = require("../../../../v1/models/User");
 
 const Account = sequelize.define(
   "Account",
@@ -52,7 +53,18 @@ const Account = sequelize.define(
   {
     tableName: "accounts",
     underscored: false,
+    indexes: [
+      {
+        fields: ["email", "id", "userName"],
+      },
+    ],
   }
 );
+
+Account.hasOne(User, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+  as: "account",
+});
 
 module.exports = Account;
