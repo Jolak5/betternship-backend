@@ -1,6 +1,5 @@
-
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); 
+const sequelize = require('../config/database');
 
 const Chat = sequelize.define('Chat', {
   message: {
@@ -11,13 +10,25 @@ const Chat = sequelize.define('Chat', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users', 
+      model: 'Users',
       key: 'id'
     }
   },
   timestamp: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
+  },
+  isSent: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false 
+  },
+  isDelivered: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false 
+  },
+  isRead: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false 
   }
 });
 

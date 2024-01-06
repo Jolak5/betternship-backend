@@ -1,30 +1,29 @@
-import Chat from '../models/chat'; 
+import Response from '../core/utils/Response'; 
+import Chat from '../models/chat';
 
 export const createChat = async (req, res) => {
   try {
-    const { message, senderId } = req.body; 
+    const { message, senderId } = req.body;
     const newChat = await Chat.create({ message, senderId });
-    res.status(201).json(newChat);
+    Response.created(res, newChat); // Use the created method from the response model
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    Response.internalError(res, error.message); // Use the internalError method for error response
   }
 };
-
 
 export const getChat = async (req, res) => {
   try {
-    const chatId = req.params.id; 
+    const chatId = req.params.id;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      res.status(404).json({ message: 'Chat not found' });
+      Response.notFound(res, 'Chat not found'); // Use the notFound method for 404 response
     } else {
-      res.status(200).json(chat);
+      Response.success(res, chat); // Use the success method for successful response
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    Response.internalError(res, error.message); // Use the internalError method for error response
   }
 };
-
 
 export const updateChat = async (req, res) => {
   try {
@@ -32,29 +31,28 @@ export const updateChat = async (req, res) => {
     const { message } = req.body;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      res.status(404).json({ message: 'Chat not found' });
+      Response.notFound(res, 'Chat not found'); 
     } else {
-      chat.message = message; 
+      chat.message = message;
       await chat.save();
-      res.status(200).json(chat);
+      Response.success(res, chat); 
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    Response.internalError(res, error.message); 
   }
 };
-
 
 export const deleteChat = async (req, res) => {
   try {
     const chatId = req.params.id;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      res.status(404).json({ message: 'Chat not found' });
+      Response.notFound(res, 'Chat not found'); // Use the notFound method for 404 response
     } else {
       await chat.destroy();
-      res.status(200).json({ message: 'Chat deleted successfully' });
+      Response.success(res, { message: 'Chat deleted successfully' }); // Use the success method for successful response
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    Response.internalError(res, error.message); // Use the internalError method for error response
   }
 };

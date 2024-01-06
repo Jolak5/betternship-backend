@@ -1,4 +1,5 @@
 const express = require("express");
+const router = require("./src/core/v1/routers/router");
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -8,7 +9,6 @@ const userName = process.env.POSTGRESQL_USERNAME;
 const host = process.env.POSTGRESQL_HOST;
 const password = process.env.POSTGRESQL_KEY;
 
-const chatRouter = require("./routes/chatRouter");
 
 const sequelize = new Sequelize(databaseName, userName, password, {
   host,
@@ -29,12 +29,14 @@ const TestConnection = async () => {
 TestConnection();
 
 const app = express();
+app.use(express.json());
 
-app.use("/chats", chatRouter);
+app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
+
 
 app.get("/", (_, res) => {
   res.status(200).json({
