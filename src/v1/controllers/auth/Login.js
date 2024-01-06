@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const Account = require("../../../core/v1/models/auth/Account");
+const Account = require('../../models/Account')
 
 const KEY = process.env.KEY;
 const Login = async (req, res) => {
