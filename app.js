@@ -8,6 +8,7 @@ const userName = process.env.POSTGRESQL_USERNAME;
 const host = process.env.POSTGRESQL_HOST;
 const password = process.env.POSTGRESQL_KEY;
 
+const chatRouter = require("./routes/chatRouter");
 
 const sequelize = new Sequelize(databaseName, userName, password, {
   host,
@@ -28,6 +29,8 @@ const TestConnection = async () => {
 TestConnection();
 
 const app = express();
+
+app.use("/chats", chatRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
