@@ -3,6 +3,7 @@ const cors = require("cors");
 const sequelize = require("./src/core/databases/init");
 const router = require("./src/core/v1/routers/router");
 const VerifyAuth = require("./src/middlewares/auth/VerifyAuth");
+const userRoutes = require('./routes/userRoutes')
 require("dotenv").config();
 
 const PORT = process.env.PORT || 80;
@@ -23,6 +24,7 @@ TestConnection();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/users', userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
