@@ -1,62 +1,59 @@
-import Response from '../core/utils/Response'; 
+import { Response } from 'express';
+import { HttpResponse } from '../core/utils/Response';
 import Chat from '../models/chat';
 
-const sendHttpResponse = (res, status, message) => {
-  res.status(status).send(message);
-};
-
-export const createChat = async (req, res) => {
+export const createChat = async (req: any, res: Response) => {
   try {
     const { message, senderId } = req.body;
     const newChat = await Chat.create({ message, senderId });
-    sendHttpResponse(res, 200, "Chat created successfully");
+    HttpResponse(res, 200, 'Chat created successfully', newChat);
   } catch (error) {
-    sendHttpResponse(res, 500, error.message);
+    HttpResponse(res, 500, error.message);
   }
 };
 
-export const getChat = async (req, res) => {
+export const getChat = async (req: any, res: Response) => {
   try {
     const chatId = req.params.id;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      sendHttpResponse(res, 404, 'Chat not found');
+      HttpResponse(res, 404, 'Chat not found');
     } else {
-      sendHttpResponse(res, 200, chat);
+      HttpResponse(res, 200, 'Chat retrieved successfully', chat);
     }
   } catch (error) {
-    sendHttpResponse(res, 500, error.message);
+    HttpResponse(res, 500, error.message);
   }
 };
 
-export const updateChat = async (req, res) => {
+export const updateChat = async (req: any, res: Response) => {
   try {
     const chatId = req.params.id;
     const { message } = req.body;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      sendHttpResponse(res, 404, 'Chat not found');
+      HttpResponse(res, 404, 'Chat not found');
     } else {
       chat.message = message;
       await chat.save();
-      sendHttpResponse(res, 200, chat);
+      HttpResponse(res, 200, 'Chat updated successfully', chat);
     }
   } catch (error) {
-    sendHttpResponse(res, 500, error.message);
+    HttpResponse(res, 500, error.message);
   }
 };
 
-export const deleteChat = async (req, res) => {
+export const deleteChat = async (req: any, res: Response) => {
   try {
     const chatId = req.params.id;
     const chat = await Chat.findByPk(chatId);
     if (!chat) {
-      sendHttpResponse(res, 404, 'Chat not found');
+      HttpResponse(res, 404, 'Chat not found');
     } else {
       await chat.destroy();
-      sendHttpResponse(res, 200, { message: 'Chat deleted successfully' });
+      HttpResponse(res, 200, 'Chat deleted successfully', { message: 'Chat deleted successfully' });
     }
   } catch (error) {
-    sendHttpResponse(res, 500, error.message);
+    HttpResponse(res, 500, error.message);
   }
 };
