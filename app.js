@@ -1,18 +1,11 @@
 const express = require("express");
-const { Sequelize } = require("sequelize");
+const cors = require("cors");
+const sequelize = require("./src/core/databases/init");
+const router = require("./src/core/v1/routers/router");
+const VerifyAuth = require("./src/middlewares/auth/VerifyAuth");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 80;
-const databaseName = process.env.POSTGRES_DATABASE;
-const userName = process.env.POSTGRESQL_USERNAME;
-const host = process.env.POSTGRESQL_HOST;
-const password = process.env.POSTGRESQL_KEY;
-
-
-const sequelize = new Sequelize(databaseName, userName, password, {
-  host,
-  dialect: "postgres",
-});
 
 const TestConnection = async () => {
   try {
@@ -28,10 +21,14 @@ const TestConnection = async () => {
 TestConnection();
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
+
+app.use(router);
 
 app.get("/", (_, res) => {
   res.status(200).json({
@@ -40,6 +37,7 @@ app.get("/", (_, res) => {
   });
 });
 
+app.get('/test', VerifyAuth)
 app.use((_, res, __) => {
   res.status(404).json({
     statusCode: 0,
