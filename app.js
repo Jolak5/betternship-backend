@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const sequelize = require("./src/core/databases/init");
+const http = require("http");
+const sequelize = require("./src/core/database/init");
 const router = require("./src/core/v1/routers/router");
+const websocket = require('./src/core/communication/websocket')
 const VerifyAuth = require("./src/middlewares/auth/VerifyAuth");
 require("dotenv").config();
 
@@ -24,7 +26,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+
+websocket(server);
+server.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
 
@@ -37,7 +42,7 @@ app.get("/", (_, res) => {
   });
 });
 
-app.get('/test', VerifyAuth)
+app.get("/test", VerifyAuth);
 app.use((_, res, __) => {
   res.status(404).json({
     statusCode: 0,
