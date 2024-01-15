@@ -9,7 +9,6 @@ module.exports = async function (server) {
   // *All connected clients mapped by its corresponding user id
   const clients = new Map();
 
-  // *All pending messages mapped by their user id
   wss.on("connection", async (ws, req) => {
     const query = url.parse(req.url, true).query;
 
@@ -34,7 +33,7 @@ module.exports = async function (server) {
       }
     }
 
-    console.log("WebSocket connection is established");
+    console.log(`WebSocket client (${query.clientId}) is connected`);
 
     ws.on("message", async (message) => {
       if (ws.readyState === WebSocket.OPEN) {
