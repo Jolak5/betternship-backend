@@ -1,9 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger-output.json");
 const sequelize = require("./src/core/database/init");
 const router = require("./src/core/v1/routers/router");
-const websocket = require('./src/core/communication/websocket')
+const websocket = require("./src/core/communication/websocket");
 const VerifyAuth = require("./src/middlewares/auth/VerifyAuth");
 require("dotenv").config();
 
@@ -33,7 +35,9 @@ server.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(router);
+
 
 app.get("/", (_, res) => {
   res.status(200).json({
