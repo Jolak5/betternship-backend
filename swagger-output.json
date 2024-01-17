@@ -37,16 +37,13 @@
         ],
         "responses": {
           "201": {
-            "statusCode": "1",
-            "message": "userName account is successfully created. Please verify your email to continue"
+            "description": "Response successful with request to check OTP"
           },
           "400": {
-            "statusCode": "0",
-            "message": "Error message"
+            "description": "Response to indicate an error requiring to re-check the request body"
           },
           "500": {
-            "statusCode": "0",
-            "message": "Error message"
+            "description": "Response to indicate server error"
           }
         }
       }

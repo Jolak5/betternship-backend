@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../core/database/init");
 const User = require("./User");
-const OTP = require("./Otp");
 
 const Account = sequelize.define(
   "Account",
@@ -65,7 +64,7 @@ const Account = sequelize.define(
 Account.hasOne(User, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
-  as: "account"
- });
+  as: "account",
+});
 
 module.exports = Account;

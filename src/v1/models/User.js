@@ -31,9 +31,13 @@ const User = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    role: {
-      type: DataTypes.ENUM(...Role),
-      allowNull: false,
+    about: {
+      type: DataTypes.TEXT,
+      defaultValue: "",
+    },
+    skills: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
     },
   },
   {
