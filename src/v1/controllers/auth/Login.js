@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const Account = require('../../models/Account')
+const Account = require("../../models/Account");
+const { HttpResponse } = require("../../../core/utils/Response");
 
 const KEY = process.env.KEY;
 const Login = async (req, res) => {
@@ -27,6 +28,10 @@ const Login = async (req, res) => {
         statusCode: 0,
         message: "User cannot be found",
       });
+    }
+
+    if (!account.isVerified) {
+      return HttpResponse(res, 401, "Account is not verified");
     }
     const hashed = account.password;
     console.log(hashed, password);

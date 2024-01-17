@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../../core/databases/init");
+const sequelize = require("../../core/database/init");
 const { Role } = require("../enums/Enums");
 
 const User = sequelize.define(
