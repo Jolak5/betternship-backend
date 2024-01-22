@@ -2,6 +2,8 @@
  * @swagger
  * /v1/auth/signup:
  *   post:
+ *     tags:
+ *     - Auth
  *     description: Create a new user account
  *     parameters:
  *       - name: body
@@ -69,6 +71,8 @@
  * /v1/auth/login:
  *   post:
  *     description: Authenticate a user
+ *     tags:
+ *     - Auth
  *     parameters:
  *       - name: body
  *         in: body
@@ -136,6 +140,8 @@
  * @swagger
  * /v1/auth/account/verify:
  *   post:
+ *     tags:
+ *     - Auth
  *     description: Verify a user's email
  *     parameters:
  *       - name: body
