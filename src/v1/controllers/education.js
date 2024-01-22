@@ -1,10 +1,12 @@
 const Education = require("../models/Education");
-const Account = require("../models/account");
+const Account = require("../models/Account");
 const { HttpResponse } = require("../../core/utils/Response");
 const User = require("../models/User");
+const { v4 } = require("uuid");
 
 const GetAllEducations = async (req, res) => {
   try {
+    console.log("ping");
     const { userId } = req.params;
 
     const educations = await Education.findAll({
@@ -26,8 +28,7 @@ const AddEducation = async (req, res) => {
     const data = req.body;
     const { userId } = req.params;
     const account = await Account.findOne({ where: { id: userId } });
-    const user = await User.findOne({ where: { userId } });
-    if (!account || !user) {
+    if (!account) {
       return HttpResponse(res, 400, "User not found");
     }
     const educationExist = await Education.findOne({
@@ -38,7 +39,7 @@ const AddEducation = async (req, res) => {
       return HttpResponse(res, 400, "Duplicate education detected.");
     }
 
-    const newEducation = await Education.create({ userId, ...data });
+    const newEducation = await Education.create({ id: v4(), userId, ...data });
 
     return HttpResponse(
       res,
@@ -53,11 +54,10 @@ const AddEducation = async (req, res) => {
 
 const UpdateEducation = async (req, res) => {
   try {
-    const { data } = req.body;
     const { educationId } = req.params;
 
-    const updatedEducation = await Education.update({
-      where: { id: educationId, ...data },
+    const updatedEducation = await Education.update(req.body, {
+      where: { id: educationId },
     });
 
     return HttpResponse(

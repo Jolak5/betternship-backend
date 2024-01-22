@@ -14,7 +14,7 @@ const PendingMessage = sequelize.define("PendingMessage", {
     },
   },
   recipientId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     references: {
       model: "accounts",
       key: "id",

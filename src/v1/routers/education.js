@@ -1,5 +1,5 @@
 const express = require("express");
-const verifyAuth = require("../../middlewares/auth/verifyAuth");
+const verifyAuth = require("../../middlewares/auth/VerifyAuth");
 const {
   AddEducation,
   UpdateEducation,
@@ -9,6 +9,7 @@ const {
 const educationRouter = express.Router();
 
 educationRouter.get("/v1/user/:userId/education", verifyAuth, GetAllEducations);
+
 educationRouter.post("/v1/user/:userId/education", verifyAuth, AddEducation);
 educationRouter.put(
   "/v1/user/:userId/education/:educationId/update",

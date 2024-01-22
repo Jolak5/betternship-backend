@@ -7,7 +7,6 @@ const KEY = process.env.KEY;
 const VerifyAuth = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-
     if (!authorization) {
       return HttpResponse(res, 401, "No authorization headers set");
     }
