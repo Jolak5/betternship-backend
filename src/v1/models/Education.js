@@ -20,7 +20,7 @@ const Education = sequelize.define(
     userId: {
       type: DataTypes.UUID,
       references: {
-        model: "users",
+        model: "accounts",
         key: "id",
       },
     },

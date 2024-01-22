@@ -1,6 +1,6 @@
 {
-  "watch": ["src/**/*.{ts,js}", "app.js"],
-  "ext": "ts,js",
+  "watch": ["src/**/*.{ts,js,json}", "app.js", "swagger.js"],
+  "ext": "ts,js,json",
   "ignore": ["src/**/*.spec.ts"],
   "exec": "ts-node ./app.js"
 }
