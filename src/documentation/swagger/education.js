@@ -2,6 +2,8 @@
  * @swagger
  * /v1/user/{userId}/education:
  *   get:
+ *     tags:
+ *     - Education
  *     description: Get all education records for a user
  *     parameters:
  *       - in: header
@@ -32,6 +34,8 @@
  * @swagger
  * /v1/user/{userId}/education:
  *   post:
+ *     tags:
+ *     - Education
  *     description: Add a new education record for a user
  *     parameters:
  *       - in: header
@@ -65,6 +69,8 @@
  * @swagger
  * /v1/user/{userId}/education/{educationId}/update:
  *   put:
+ *     tags:
+ *     - Education
  *     description: Update an education record for a user
  *     parameters:
  *       - in: header
@@ -106,6 +112,8 @@
  * @swagger
  * /v1/user/{userId}/education/{educationId}/delete:
  *   delete:
+ *     tags:
+ *     - Education
  *     description: Delete an education record for a user
  *     parameters:
  *       - in: header
