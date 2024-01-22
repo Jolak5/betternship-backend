@@ -1,5 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerAutogen = require("swagger-autogen")();
+const educationDoc = require("./src/documentation/swagger/education");
 const options = {
   swaggerDefinition: {
     info: {
@@ -8,17 +8,9 @@ const options = {
       description: "The API documentation for the client Side",
     },
   },
-  apis: ["./src/core/v1/routers/router.js", "./src/v1/routers/auth/auth.js"],
+  apis: ["./src/documentation/swagger/*.js"],
 };
 
-const outputFile = "./swagger-output.json";
-
-const routes = [
-  "./src/v1/routers/auth/auth.js",
-  "./src/core/v1/routers/router.js",
-];
-
-swaggerAutogen(outputFile, routes);
 
 const swaggerSpec = swaggerJsdoc(options);
 
